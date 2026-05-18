@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Sherlock Holmes Detective Agency</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{overflow:hidden;font-family:'Courier New',monospace}
+#app{width:100vw;height:100vh;background:linear-gradient(180deg,#87CEEB 0%,#a8d8ea 40%,#f0e6d3 75%,#e8dcc8 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.fog{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 80%,rgba(40,50,80,0.25) 0%,transparent 70%)}
+.ph{display:none;text-align:center;z-index:50;position:absolute;width:90%;max-width:650px;flex-direction:column;align-items:center}
+.ph.on{display:flex}
+.cur{opacity:0.4;animation:bk 1s step-end infinite}
+.ri{opacity:0;transform:translateY(20px) scale(0.95);transition:all 1.5s ease-out}
+.ri.s{opacity:1;transform:translateY(0) scale(1)}
+@keyframes bk{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+@keyframes drift{0%{transform:translateX(-5%)}50%{transform:translateX(5%)}100%{transform:translateX(-5%)}}
+</style></head><body>
+<div id="app" onclick="go()">
+
+<!-- London skyline -->
+<svg style="position:fixed;bottom:0;left:0;width:100%;height:45vh;z-index:3;pointer-events:none" viewBox="0 0 1200 300">
+
+<!-- Sky gradient at bottom -->
+<defs>
+<linearGradient id="thames" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#5a8aaa" stop-opacity="0.3"/>
+<stop offset="100%" stop-color="#4a7a9a" stop-opacity="0.5"/>
+</linearGradient>
+</defs>
+
+<!-- Thames river -->
+<rect x="0" y="220" width="1200" height="80" fill="url(#thames)"/>
+<!-- River reflections -->
+<line x1="50" y1="240" x2="120" y2="240" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<line x1="200" y1="250" x2="300" y2="250" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<line x1="400" y1="235" x2="480" y2="235" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<line x1="550" y1="255" x2="650" y2="255" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<line x1="750" y1="240" x2="850" y2="240" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<line x1="950" y1="250" x2="1050" y2="250" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+<!-- Embankment wall -->
+<rect x="0" y="215" width="1200" height="8" fill="#a09080"/>
+
+<!-- === BIG BEN (left) === -->
+<rect x="100" y="55" width="40" height="165" fill="#c9a96e" stroke="#a8884a" stroke-width="0.5"/>
+<!-- Tower details -->
+<rect x="95" y="45" width="50" height="14" fill="#b8985e"/>
+<rect x="98" y="42" width="44" height="6" fill="#d4b87a"/>
+<!-- Spire -->
+<rect x="112" y="10" width="16" height="38" fill="#d4b87a"/>
+<polygon points="120,0 110,10 130,10" fill="#d4b87a"/>
+<!-- Flag -->
+<line x1="120" y1="0" x2="120" y2="-8" stroke="#666" stroke-width="1"/>
+<rect x="120" y="-8" width="8" height="5" fill="#cc2222"/>
+<!-- Clock face -->
+<circle cx="120" cy="68" r="14" fill="#f5f0e0" stroke="#8a7040" stroke-width="2.5"/>
+<line x1="120" y1="68" x2="120" y2="58" stroke="#333" stroke-width="2"/>
+<line x1="120" y1="68" x2="128" y2="68" stroke="#333" stroke-width="1.5"/>
+<circle cx="120" cy="68" r="2" fill="#333"/>
+<!-- Hour markers -->
+<circle cx="120" cy="56" r="1" fill="#333"/>
+<circle cx="132" cy="68" r="1" fill="#333"/>
+<circle cx="120" cy="80" r="1" fill="#333"/>
+<circle cx="108" cy="68" r="1" fill="#333"/>
+<!-- Windows columns -->
+<rect x="107" y="92" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="118" y="92" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="129" y="92" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="107" y="112" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="118" y="112" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="129" y="112" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="107" y="132" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="118" y="132" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="129" y="132" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="107" y="152" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="118" y="152" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<rect x="129" y="152" width="7" height="10" rx="2" fill="#e8d8b0"/>
+<!-- Base -->
+<rect x="93" y="175" width="54" height="40" fill="#b8985e"/>
+<rect x="110" y="190" width="20" height="25" rx="8" fill="#8a7040"/>
+
+<!-- === PARLIAMENT (next to Big Ben) === -->
+<rect x="155" y="130" width="160" height="90" fill="#c9a96e"/>
+<!-- Towers -->
+<rect x="160" y="115" width="16" height="20" fill="#b8985e"/>
+<rect x="190" y="110" width="16" height="25" fill="#b8985e"/>
+<rect x="220" y="115" width="16" height="20" fill="#b8985e"/>
+<rect x="250" y="110" width="16" height="25" fill="#b8985e"/>
+<rect x="280" y="115" width="16" height="20" fill="#b8985e"/>
+<rect x="300" y="110" width="16" height="25" fill="#b8985e"/>
+<!-- Pinnacles -->
+<polygon points="168,108 160,115 176,115" fill="#b8985e"/>
+<polygon points="198,103 190,110 206,110" fill="#b8985e"/>
+<polygon points="228,108 220,115 236,115" fill="#b8985e"/>
+<polygon points="258,103 250,110 266,110" fill="#b8985e"/>
+<polygon points="288,108 280,115 296,115" fill="#b8985e"/>
+<polygon points="308,103 300,110 316,110" fill="#b8985e"/>
+<!-- Windows -->
+<rect x="162" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
+<rect x="178" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
+<rect x="194" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
+<rect x="210" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
+<rect x="226" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
+<rect x="242" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
+<rect x="258" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
+<rect x="274" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
+<rect x="290" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
+
+<!-- === LONDON EYE (center) === -->
+<circle cx="550" cy="100" r="100" fill="none" stroke="#7a9ab5" stroke-width="4"/>
+<circle cx="550" cy="100" r="7" fill="#7a9ab5"/>
+<!-- Spokes -->
+<line x1="550" y1="0" x2="550" y2="200" stroke="#8aaac5" stroke-width="1.5"/>
+<line x1="450" y1="100" x2="650" y2="100" stroke="#8aaac5" stroke-width="1.5"/>
+<line x1="479" y1="29" x2="621" y2="171" stroke="#8aaac5" stroke-width="1.5"/>
+<line x1="621" y1="29" x2="479" y2="171" stroke="#8aaac5" stroke-width="1.5"/>
+<!-- Capsules -->
+<ellipse cx="550" cy="0" rx="10" ry="7" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
+<ellipse cx="550" cy="200" rx="10" ry="7" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
+<ellipse cx="450" cy="100" rx="7" ry="10" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
+<ellipse cx="650" cy="100" rx="7" ry="10" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
+<ellipse cx="479" cy="29" rx="9" ry="7" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
+<ellipse cx="621" cy="29" rx="9" ry="7" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
+<ellipse cx="479" cy="171" rx="9" ry="7" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
+<ellipse cx="621" cy="171" rx="9" ry="7" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
+<!-- Support -->
+<line x1="550" y1="200" x2="550" y2="220" stroke="#7a9ab5" stroke-width="5"/>
+<rect x="535" y="210" width="30" height="10" fill="#8a9aaa"/>
+
+<!-- === RED BUS (on embankment left of Eye) === -->
+<rect x="380" y="185" width="85" height="30" rx="3" fill="#cc2222"/>
+<rect x="382" y="168" width="81" height="20" rx="3" fill="#cc2222"/>
+<rect x="382" y="186" width="81" height="3" fill="#aa1111"/>
+<!-- Windows top -->
+<rect x="387" y="171" width="10" height="13" rx="1" fill="#cce8ff"/>
+<rect x="401" y="171" width="10" height="13" rx="1" fill="#cce8ff"/>
+<rect x="415" y="171" width="10" height="13" rx="1" fill="#cce8ff"/>
+<rect x="429" y="171" width="10" height="13" rx="1" fill="#cce8ff"/>
+<rect x="443" y="171" width="10" height="13" rx="1" fill="#cce8ff"/>
+<!-- Windows bottom -->
+<rect x="392" y="190" width="12" height="13" rx="1" fill="#cce8ff"/>
+<rect x="410" y="190" width="12" height="13" rx="1" fill="#cce8ff"/>
+<rect x="428" y="190" width="12" height="13" rx="1" fill="#cce8ff"/>
+<rect x="446" y="190" width="12" height="13" rx="1" fill="#cce8ff"/>
+<!-- Wheels -->
+<circle cx="400" cy="217" r="7" fill="#333" stroke="#555" stroke-width="1.5"/>
+<circle cx="400" cy="217" r="3" fill="#888"/>
+<circle cx="448" cy="217" r="7" fill="#333" stroke="#555" stroke-width="1.5"/>
+<circle cx="448" cy="217" r="3" fill="#888"/>
+
+<!-- === RED PHONE BOOTH (near bus) === -->
+<rect x="345" y="178" width="18" height="42" rx="2" fill="#cc2222" stroke="#aa1111" stroke-width="1"/>
+<rect x="345" y="175" width="18" height="6" rx="2" fill="#aa1111"/>
+<rect x="347" y="187" width="14" height="10" rx="1" fill="#cce8ff"/>
+<rect x="347" y="200" width="14" height="10" rx="1" fill="#cce8ff"/>
+<rect x="350" y="176" width="8" height="2" fill="#ffcc00"/>
+
+<!-- === TOWER BRIDGE (right) === -->
+<!-- Left tower -->
+<rect x="820" y="80" width="32" height="140" fill="#8ab0c8" stroke="#7aa0b8" stroke-width="0.5"/>
+<rect x="815" y="68" width="42" height="16" fill="#7aa0b8"/>
+<polygon points="836,38 815,68 857,68" fill="#7aa0b8"/>
+<line x1="836" y1="28" x2="836" y2="38" stroke="#666" stroke-width="1.5"/>
+<rect x="836" y="24" width="8" height="5" fill="#cc2222"/>
+<!-- Right tower -->
+<rect x="920" y="80" width="32" height="140" fill="#8ab0c8" stroke="#7aa0b8" stroke-width="0.5"/>
+<rect x="915" y="68" width="42" height="16" fill="#7aa0b8"/>
+<polygon points="936,38 915,68 957,68" fill="#7aa0b8"/>
+<line x1="936" y1="28" x2="936" y2="38" stroke="#666" stroke-width="1.5"/>
+<rect x="936" y="24" width="8" height="5" fill="#cc2222"/>
+<!-- Top walkway -->
+<rect x="852" y="90" width="68" height="10" rx="2" fill="#7aa0b8"/>
+<rect x="852" y="100" width="68" height="4" fill="#6a90a8"/>
+<!-- Bridge road (opening) -->
+<path d="M815 180 L852 160 L852 220 L815 220 Z" fill="#8ab0c8"/>
+<path d="M957 180 L920 160 L920 220 L957 220 Z" fill="#8ab0c8"/>
+<rect x="852" y="195" width="68" height="10" fill="#8ab0c8"/>
+<!-- Chains -->
+<path d="M852 180 Q886 165 920 180" fill="none" stroke="#6a90a8" stroke-width="2"/>
+<!-- Tower windows -->
+<rect x="828" y="100" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="838" y="100" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="828" y="120" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="838" y="120" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="828" y="140" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="838" y="140" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="928" y="100" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="938" y="100" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="928" y="120" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="938" y="120" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="928" y="140" width="8" height="10" rx="2" fill="#cce8ff"/>
+<rect x="938" y="140" width="8" height="10" rx="2" fill="#cce8ff"/>
+
+<!-- === BLACK TAXI (right side) === -->
+<path d="M1000 200 Q1000 185 1016 185 L1052 185 Q1068 185 1068 194 L1068 212 Q1068 218 1062 218 L1006 218 Q1000 218 1000 212 Z" fill="#222"/>
+<rect x="1000" y="212" width="68" height="4" rx="2" fill="#333"/>
+<rect x="1008" y="190" width="14" height="14" rx="2" fill="#cce8ff"/>
+<rect x="1027" y="190" width="14" height="14" rx="2" fill="#cce8ff"/>
+<rect x="1046" y="190" width="14" height="14" rx="2" fill="#cce8ff"/>
+<rect x="1028" y="182" width="12" height="5" rx="2" fill="#ffee55"/>
+<circle cx="1014" cy="218" r="6" fill="#333" stroke="#555" stroke-width="1"/>
+<circle cx="1014" cy="218" r="2.5" fill="#888"/>
+<circle cx="1054" cy="218" r="6" fill="#333" stroke="#555" stroke-width="1"/>
+<circle cx="1054" cy="218" r="2.5" fill="#888"/>
+
+<!-- Trees -->
+<circle cx="70" cy="190" r="20" fill="#4a8c3a"/>
+<circle cx="58" cy="195" r="15" fill="#3a7c2a"/>
+<rect x="67" y="208" width="6" height="12" fill="#8a6530"/>
+<circle cx="1120" cy="192" r="18" fill="#4a8c3a"/>
+<circle cx="1110" cy="198" r="14" fill="#3a7c2a"/>
+<rect x="1117" y="208" width="5" height="12" fill="#8a6530"/>
+<circle cx="1160" cy="196" r="14" fill="#5a9c4a"/>
+<rect x="1158" y="208" width="4" height="12" fill="#8a6530"/>
+
+<!-- Lamp posts -->
+<rect x="330" y="180" width="3" height="40" fill="#555"/>
+<circle cx="331" cy="178" r="5" fill="#ffdd66" opacity="0.6"/>
+<rect x="770" y="180" width="3" height="40" fill="#555"/>
+<circle cx="771" cy="178" r="5" fill="#ffdd66" opacity="0.6"/>
+
+</svg>
+
+<!-- Fog clouds -->
+<div style="position:fixed;top:30%;left:0;width:120%;height:80px;z-index:4;pointer-events:none;opacity:0.15;animation:drift 20s ease-in-out infinite">
+<div style="position:absolute;width:300px;height:60px;background:radial-gradient(ellipse,rgba(255,255,255,0.5),transparent);left:10%"></div>
+<div style="position:absolute;width:400px;height:70px;background:radial-gradient(ellipse,rgba(255,255,255,0.4),transparent);left:50%"></div>
+</div>
+<div class="fog"></div>
+
+<!-- Header - clean, no glitch -->
+<div style="position:fixed;top:20px;left:0;right:0;text-align:center;z-index:200;pointer-events:none">
+<div style="color:#2a5da4;font-size:18px;font-weight:bold;letter-spacing:2px;font-family:Georgia,serif;text-shadow:0 1px 3px rgba(255,255,255,0.5)">Language Connexion</div>
+</div>
+
+<!-- IDLE -->
+<div class="ph on" id="P0">
+<div style="font-size:50px;margin-bottom:10px"><span style="animation:float 3s ease infinite">🔍</span> <span style="animation:float 3s ease infinite;animation-delay:0.5s">🎩</span> <span style="animation:float 3s ease infinite;animation-delay:1s">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div>
+<div style="color:#1a2a5c;font-size:28px;font-weight:bold;letter-spacing:4px;text-shadow:0 1px 3px rgba(255,255,255,0.5)">SHERLOCK HOLMES</div>
+<div style="color:#b8432e;font-size:22px;font-weight:bold;letter-spacing:5px;margin-top:5px">DETECTIVE AGENCY</div>
+<div style="color:#4a6a8a;font-size:13px;letter-spacing:3px;margin-top:12px">🏢 221B Baker Street, London</div>
+<div style="color:#6a7a8a;font-size:11px;margin-top:20px">22 JUIN 2026 — COLLÈGE STANISLAS, PARIS</div>
+<div style="color:#8a8a8a;font-size:12px;letter-spacing:3px;margin-top:25px;animation:pu 2s infinite">[ CLIQUEZ POUR COMMENCER ]</div>
+</div>
+
+<!-- INTRO -->
+<div class="ph" id="P1">
+<div style="font-size:50px;margin-bottom:15px">📨</div>
+<div style="color:#c23030;font-size:15px;font-weight:bold;letter-spacing:5px;animation:pu 1s infinite">✉️ A LETTER FROM LONDON ✉️</div>
+<div style="color:#4a6a8a;font-size:12px;font-weight:bold;letter-spacing:3px;margin-top:5px">UNE LETTRE DE LONDRES</div>
+<div style="color:#8a8a8a;font-size:11px;letter-spacing:3px;margin-top:15px">OPENING... / OUVERTURE...</div>
+</div>
+
+<!-- TERMINAL -->
+<div class="ph" id="P2">
+<div id="emoji" style="font-size:50px;margin-bottom:15px">🕵️</div>
+<div id="EN" style="color:#1a2a5c;font-size:22px;line-height:1.7;font-weight:bold;text-shadow:0 1px 2px rgba(255,255,255,0.5);min-height:35px"></div>
+<div id="FR" style="color:#c23030;font-size:15px;opacity:0.8;min-height:22px;margin-top:10px;font-weight:bold;font-style:italic"></div>
+</div>
+
+
+
+</div>
+
+<!-- DATE -->
+<div class="ph" id="P4">
+<div style="font-size:45px;margin-bottom:10px"><span style="animation:float 3s ease infinite">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> <span style="animation:float 3s ease infinite;animation-delay:0.7s">🏰</span> <span style="animation:float 3s ease infinite;animation-delay:1.4s">☕</span></div>
+<div style="color:#2a1a08;font-size:44px;font-weight:bold;text-shadow:0 1px 3px rgba(255,255,255,0.5)">22 JUIN 2026</div>
+<div style="color:#b8432e;font-size:14px;letter-spacing:5px;margin-top:8px;font-weight:bold">22 JUNE 2026</div>
+<div style="color:#4a6a8a;font-size:14px;letter-spacing:3px;margin-top:18px;font-weight:bold">COLLÈGE STANISLAS, PARIS</div>
+<div style="color:#b8432e;font-size:13px;font-weight:bold;letter-spacing:3px;margin-top:18px;animation:pu 2s infinite">🔔 BE READY / SOYEZ PRÊTS 🔔</div>
+</div>
+
+<!-- TITLE -->
+<div class="ph" id="P5">
+<div class="ri" id="R1"><div style="font-size:50px;margin-bottom:10px">🎩🔍</div></div>
+<div class="ri" id="R2"><div style="color:#1a2a5c;font-size:32px;font-weight:bold;letter-spacing:4px;text-shadow:0 1px 3px rgba(255,255,255,0.5)">SHERLOCK HOLMES</div><div style="color:#b8432e;font-size:26px;font-weight:bold;letter-spacing:5px;margin-top:5px">DETECTIVE AGENCY</div></div>
+<div class="ri" id="R3" style="margin-top:12px"><div style="color:#4a6a8a;font-size:13px;letter-spacing:3px;font-weight:bold">🏢 221B Baker Street, London</div></div>
+<div class="ri" id="R4" style="margin-top:18px"><div style="color:#6a7a8a;font-size:14px;letter-spacing:3px;font-weight:bold">22 JUIN 2026 — COLLÈGE STANISLAS</div></div>
+<div class="ri" id="R5" style="margin-top:22px"><div style="color:#c23030;font-size:26px;font-weight:bold;letter-spacing:4px;animation:pu 2.5s infinite">ARE YOU READY? 🔍</div><div style="color:#c23030;font-size:15px;font-weight:bold;margin-top:8px">ÊTES-VOUS PRÊTS ?</div></div>
+</div>
+
+<!-- END -->
+<div class="ph" id="P6">
+<div style="font-size:35px;margin-bottom:15px;opacity:0.5">🔍🎩</div>
+<div style="color:#8a8a8a;font-size:12px;font-weight:bold;letter-spacing:4px">[ END / FIN DU MESSAGE ]</div>
+<div style="color:#999;font-size:11px;letter-spacing:3px;margin-top:15px">CLIQUEZ POUR REJOUER</div>
+</div>
+
+</div>
+<script>
+var L=[
+{en:"Hello!",fr:"Bonjour !",p:2000,e:"👋"},
+{en:"We are Dan and Daisy.",fr:"Nous sommes Dan et Daisy.",p:2500,e:"🕵️‍♂️🕵️‍♀️"},
+{en:"We are detectives from London!",fr:"Nous sommes détectives à Londres !",p:2800,e:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+{en:"We work at 221B Baker Street.",fr:"On travaille au 221B Baker Street.",p:2800,e:"🏢"},
+{en:"We have a big problem!",fr:"On a un gros problème !",p:2500,e:"😱"},
+{en:"A teacher is missing!",fr:"Un professeur a disparu !",p:3000,e:"👩‍🏫❓"},
+{en:"We need to find clues.",fr:"Il faut trouver des indices.",p:2800,e:"🔎"},
+{en:"We need to crack secret codes.",fr:"Il faut déchiffrer des codes secrets.",p:2800,e:"🔐"},
+{en:"We need to solve the mystery!",fr:"Il faut résoudre le mystère !",p:2800,e:"🧩"},
+{en:"We need YOUR help!",fr:"On a besoin de VOUS !",p:2800,e:"👉"},
+{en:"Are you ready for the challenge?",fr:"Êtes-vous prêts à relever le défi ?",p:3500,e:"💪🔍"}
+];
+var run=false;
+function sp(id){document.querySelectorAll(".ph").forEach(function(p){p.classList.remove("on")});document.getElementById(id).classList.add("on")}
+function sl(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function tp(en,fr,em){return new Promise(function(resolve){var i=0;var mx=Math.max(en.length,fr.length);var eE=document.getElementById("EN");var fE=document.getElementById("FR");var eM=document.getElementById("emoji");eE.innerHTML='<span class="cur">▌</span>';fE.textContent="";eM.textContent=em;var iv=setInterval(function(){if(i<=mx){eE.innerHTML=en.substring(0,i)+'<span class="cur">▌</span>';if(i<=fr.length)fE.textContent=fr.substring(0,i);i++}else{clearInterval(iv);resolve()}},50)})}
+async function go(){if(run)return;run=true;
+sp("P1");await sl(3000);
+sp("P2");await sl(1000);
+for(var i=0;i<L.length;i++){await tp(L[i].en,L[i].fr,L[i].e);await sl(L[i].p)}
+await sl(800);
+sp("P4");await sl(4000);
+sp("P5");await sl(600);var ids=["R1","R2","R3","R4","R5"];for(var j=0;j<ids.length;j++){document.getElementById(ids[j]).classList.add("s");await sl(1800)}await sl(4000);
+sp("P6");run=false;document.querySelectorAll(".ri").forEach(function(r){r.classList.remove("s")})}
+</script></body></html>
