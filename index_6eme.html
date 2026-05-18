@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Sherlock Holmes Detective Agency</title>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><title>Sherlock Holmes Detective Agency</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{overflow:hidden;font-family:'Courier New',monospace}
-#app{width:100vw;height:100vh;background:linear-gradient(180deg,#87CEEB 0%,#a8d8ea 40%,#f0e6d3 75%,#e8dcc8 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
+body{overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+#app{width:100vw;height:100vh;background:linear-gradient(180deg,#87CEEB 0%,#a8d8ea 40%,#f0e6d3 75%,#e8dcc8 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .fog{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 80%,rgba(40,50,80,0.25) 0%,transparent 70%)}
 .ph{display:none;text-align:center;z-index:50;position:absolute;width:90%;max-width:650px;flex-direction:column;align-items:center;margin-bottom:28vh}
 .ph.on{display:flex}
@@ -14,6 +14,9 @@ body{overflow:hidden;font-family:'Courier New',monospace}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:0.3}}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+@keyframes spinWheel{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes busMove{0%{transform:translateX(0)}50%{transform:translateX(60px)}100%{transform:translateX(0)}}
+@keyframes taxiMove{0%{transform:translateX(0)}50%{transform:translateX(-50px)}100%{transform:translateX(0)}}
 @keyframes drift{0%{transform:translateX(-5%)}50%{transform:translateX(5%)}100%{transform:translateX(-5%)}}
 </style></head><body>
 <div id="app" onclick="go()">
@@ -108,6 +111,7 @@ body{overflow:hidden;font-family:'Courier New',monospace}
 <rect x="290" y="145" width="9" height="12" rx="3" fill="#e8d8b0"/>
 
 <!-- === LONDON EYE (center) === -->
+<g style="animation:spinWheel 30s linear infinite;transform-origin:550px 100px">
 <circle cx="550" cy="100" r="100" fill="none" stroke="#7a9ab5" stroke-width="4"/>
 <circle cx="550" cy="100" r="7" fill="#7a9ab5"/>
 <!-- Spokes -->
@@ -124,11 +128,13 @@ body{overflow:hidden;font-family:'Courier New',monospace}
 <ellipse cx="621" cy="29" rx="9" ry="7" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
 <ellipse cx="479" cy="171" rx="9" ry="7" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
 <ellipse cx="621" cy="171" rx="9" ry="7" fill="#e8f4ff" stroke="#7a9ab5" stroke-width="1.5"/>
+</g>
 <!-- Support -->
 <line x1="550" y1="200" x2="550" y2="220" stroke="#7a9ab5" stroke-width="5"/>
 <rect x="535" y="210" width="30" height="10" fill="#8a9aaa"/>
 
 <!-- === RED BUS (on embankment left of Eye) === -->
+<g style="animation:busMove 12s ease-in-out infinite">
 <rect x="380" y="185" width="85" height="30" rx="3" fill="#cc2222"/>
 <rect x="382" y="168" width="81" height="20" rx="3" fill="#cc2222"/>
 <rect x="382" y="186" width="81" height="3" fill="#aa1111"/>
@@ -149,6 +155,7 @@ body{overflow:hidden;font-family:'Courier New',monospace}
 <circle cx="448" cy="217" r="7" fill="#333" stroke="#555" stroke-width="1.5"/>
 <circle cx="448" cy="217" r="3" fill="#888"/>
 
+</g>
 <!-- === RED PHONE BOOTH (near bus) === -->
 <rect x="345" y="178" width="18" height="42" rx="2" fill="#cc2222" stroke="#aa1111" stroke-width="1"/>
 <rect x="345" y="175" width="18" height="6" rx="2" fill="#aa1111"/>
@@ -193,6 +200,7 @@ body{overflow:hidden;font-family:'Courier New',monospace}
 <rect x="938" y="140" width="8" height="10" rx="2" fill="#cce8ff"/>
 
 <!-- === BLACK TAXI (right side) === -->
+<g style="animation:taxiMove 10s ease-in-out infinite">
 <path d="M1000 200 Q1000 185 1016 185 L1052 185 Q1068 185 1068 194 L1068 212 Q1068 218 1062 218 L1006 218 Q1000 218 1000 212 Z" fill="#222"/>
 <rect x="1000" y="212" width="68" height="4" rx="2" fill="#333"/>
 <rect x="1008" y="190" width="14" height="14" rx="2" fill="#cce8ff"/>
@@ -204,6 +212,7 @@ body{overflow:hidden;font-family:'Courier New',monospace}
 <circle cx="1054" cy="218" r="6" fill="#333" stroke="#555" stroke-width="1"/>
 <circle cx="1054" cy="218" r="2.5" fill="#888"/>
 
+</g>
 <!-- Trees -->
 <circle cx="70" cy="190" r="20" fill="#4a8c3a"/>
 <circle cx="58" cy="195" r="15" fill="#3a7c2a"/>
@@ -231,32 +240,32 @@ body{overflow:hidden;font-family:'Courier New',monospace}
 
 <!-- Header - clean, no glitch -->
 <div style="position:fixed;top:20px;left:0;right:0;text-align:center;z-index:200;pointer-events:none">
-<div style="color:#2a5da4;font-size:18px;font-weight:bold;letter-spacing:2px;font-family:Georgia,serif;text-shadow:0 1px 3px rgba(255,255,255,0.5)">Language Connexion</div>
+<div style="color:#2a5da4;font-size:clamp(14px,4vw,18px);font-weight:bold;letter-spacing:clamp(1px,0.5vw,2px);font-family:Georgia,serif;text-shadow:0 1px 3px rgba(255,255,255,0.5)">Language Connexion</div>
 </div>
 
 <!-- IDLE -->
 <div class="ph on" id="P0">
-<div style="font-size:50px;margin-bottom:10px"><span style="animation:float 3s ease infinite">🔍</span> <span style="animation:float 3s ease infinite;animation-delay:0.5s">🎩</span> <span style="animation:float 3s ease infinite;animation-delay:1s">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div>
-<div style="color:#1a2a5c;font-size:28px;font-weight:bold;letter-spacing:4px;text-shadow:0 1px 3px rgba(255,255,255,0.5)">SHERLOCK HOLMES</div>
-<div style="color:#b8432e;font-size:22px;font-weight:bold;letter-spacing:5px;margin-top:5px">DETECTIVE AGENCY</div>
-<div style="color:#4a6a8a;font-size:13px;letter-spacing:3px;margin-top:12px">🏢 221B Baker Street, London</div>
+<div style="font-size:clamp(35px,10vw,50px);margin-bottom:10px"><span style="animation:float 3s ease infinite">🔍</span> <span style="animation:float 3s ease infinite;animation-delay:0.5s">🎩</span> <span style="animation:float 3s ease infinite;animation-delay:1s">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div>
+<div style="color:#1a2a5c;font-size:clamp(20px,5.5vw,28px);font-weight:bold;letter-spacing:clamp(2px,0.8vw,4px);text-shadow:0 1px 3px rgba(255,255,255,0.5)">SHERLOCK HOLMES</div>
+<div style="color:#b8432e;font-size:clamp(16px,4.5vw,22px);font-weight:bold;letter-spacing:clamp(2px,1vw,5px);margin-top:5px">DETECTIVE AGENCY</div>
+<div style="color:#4a6a8a;font-size:clamp(11px,3vw,13px);letter-spacing:clamp(1px,0.5vw,3px);margin-top:12px">🏢 221B Baker Street, London</div>
 <div style="color:#6a7a8a;font-size:11px;margin-top:20px">22 JUIN 2026 — COLLÈGE STANISLAS, PARIS</div>
 <div style="color:#8a8a8a;font-size:12px;letter-spacing:3px;margin-top:25px;animation:pu 2s infinite">[ CLIQUEZ POUR COMMENCER ]</div>
 </div>
 
 <!-- INTRO -->
 <div class="ph" id="P1">
-<div style="font-size:50px;margin-bottom:15px">📨</div>
-<div style="color:#c23030;font-size:15px;font-weight:bold;letter-spacing:5px;animation:pu 1s infinite">✉️ A LETTER FROM LONDON ✉️</div>
+<div style="font-size:clamp(35px,10vw,50px);margin-bottom:15px">📨</div>
+<div style="color:#c23030;font-size:clamp(12px,3.5vw,15px);font-weight:bold;letter-spacing:clamp(2px,1vw,5px);animation:pu 1s infinite">✉️ A LETTER FROM LONDON ✉️</div>
 <div style="color:#4a6a8a;font-size:12px;font-weight:bold;letter-spacing:3px;margin-top:5px">UNE LETTRE DE LONDRES</div>
 <div style="color:#8a8a8a;font-size:11px;letter-spacing:3px;margin-top:15px">OPENING... / OUVERTURE...</div>
 </div>
 
 <!-- TERMINAL -->
 <div class="ph" id="P2">
-<div id="emoji" style="font-size:50px;margin-bottom:15px">🕵️</div>
-<div id="EN" style="color:#1a2a5c;font-size:22px;line-height:1.7;font-weight:bold;text-shadow:0 1px 2px rgba(255,255,255,0.5);min-height:35px"></div>
-<div id="FR" style="color:#c23030;font-size:15px;opacity:0.8;min-height:22px;margin-top:10px;font-weight:bold;font-style:italic"></div>
+<div id="emoji" style="font-size:clamp(35px,10vw,50px);margin-bottom:15px">🕵️</div>
+<div id="EN" style="color:#1a2a5c;font-size:clamp(17px,4.5vw,22px);line-height:1.7;font-weight:bold;text-shadow:0 1px 2px rgba(255,255,255,0.5);min-height:35px"></div>
+<div id="FR" style="color:#c23030;font-size:clamp(13px,3.5vw,15px);opacity:0.8;min-height:22px;margin-top:10px;font-weight:bold;font-style:italic"></div>
 </div>
 
 
@@ -265,25 +274,25 @@ body{overflow:hidden;font-family:'Courier New',monospace}
 
 <!-- DATE -->
 <div class="ph" id="P4">
-<div style="font-size:45px;margin-bottom:10px"><span style="animation:float 3s ease infinite">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> <span style="animation:float 3s ease infinite;animation-delay:0.7s">🏰</span> <span style="animation:float 3s ease infinite;animation-delay:1.4s">☕</span></div>
-<div style="color:#2a1a08;font-size:44px;font-weight:bold;text-shadow:0 1px 3px rgba(255,255,255,0.5)">22 JUIN 2026</div>
-<div style="color:#b8432e;font-size:14px;letter-spacing:5px;margin-top:8px;font-weight:bold">22 JUNE 2026</div>
-<div style="color:#4a6a8a;font-size:14px;letter-spacing:3px;margin-top:18px;font-weight:bold">COLLÈGE STANISLAS, PARIS</div>
-<div style="color:#b8432e;font-size:13px;font-weight:bold;letter-spacing:3px;margin-top:18px;animation:pu 2s infinite">🔔 BE READY / SOYEZ PRÊTS 🔔</div>
+<div style="font-size:clamp(32px,9vw,45px);margin-bottom:10px"><span style="animation:float 3s ease infinite">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> <span style="animation:float 3s ease infinite;animation-delay:0.7s">🏰</span> <span style="animation:float 3s ease infinite;animation-delay:1.4s">☕</span></div>
+<div style="color:#2a1a08;font-size:clamp(28px,9vw,44px);font-weight:bold;text-shadow:0 1px 3px rgba(255,255,255,0.5)">22 JUIN 2026</div>
+<div style="color:#b8432e;font-size:clamp(11px,3vw,14px);letter-spacing:clamp(2px,1vw,5px);margin-top:8px;font-weight:bold">22 JUNE 2026</div>
+<div style="color:#4a6a8a;font-size:clamp(11px,3vw,14px);letter-spacing:clamp(1px,0.5vw,3px);margin-top:18px;font-weight:bold">COLLÈGE STANISLAS, PARIS</div>
+<div style="color:#b8432e;font-size:clamp(11px,3vw,13px);font-weight:bold;letter-spacing:clamp(1px,0.5vw,3px);margin-top:18px;animation:pu 2s infinite">🔔 BE READY / SOYEZ PRÊTS 🔔</div>
 </div>
 
 <!-- TITLE -->
 <div class="ph" id="P5">
-<div class="ri" id="R1"><div style="font-size:50px;margin-bottom:10px">🎩🔍</div></div>
-<div class="ri" id="R2"><div style="color:#1a2a5c;font-size:32px;font-weight:bold;letter-spacing:4px;text-shadow:0 1px 3px rgba(255,255,255,0.5)">SHERLOCK HOLMES</div><div style="color:#b8432e;font-size:26px;font-weight:bold;letter-spacing:5px;margin-top:5px">DETECTIVE AGENCY</div></div>
+<div class="ri" id="R1"><div style="font-size:clamp(35px,10vw,50px);margin-bottom:10px">🎩🔍</div></div>
+<div class="ri" id="R2"><div style="color:#1a2a5c;font-size:clamp(22px,6vw,32px);font-weight:bold;letter-spacing:clamp(2px,0.8vw,4px);text-shadow:0 1px 3px rgba(255,255,255,0.5)">SHERLOCK HOLMES</div><div style="color:#b8432e;font-size:clamp(18px,5vw,26px);font-weight:bold;letter-spacing:clamp(2px,1vw,5px);margin-top:5px">DETECTIVE AGENCY</div></div>
 <div class="ri" id="R3" style="margin-top:12px"><div style="color:#4a6a8a;font-size:13px;letter-spacing:3px;font-weight:bold">🏢 221B Baker Street, London</div></div>
 <div class="ri" id="R4" style="margin-top:18px"><div style="color:#6a7a8a;font-size:14px;letter-spacing:3px;font-weight:bold">22 JUIN 2026 — COLLÈGE STANISLAS</div></div>
-<div class="ri" id="R5" style="margin-top:22px"><div style="color:#c23030;font-size:26px;font-weight:bold;letter-spacing:4px;animation:pu 2.5s infinite">ARE YOU READY? 🔍</div><div style="color:#c23030;font-size:15px;font-weight:bold;margin-top:8px">ÊTES-VOUS PRÊTS ?</div></div>
+<div class="ri" id="R5" style="margin-top:22px"><div style="color:#c23030;font-size:clamp(18px,5.5vw,26px);font-weight:bold;letter-spacing:clamp(2px,0.8vw,4px);animation:pu 2.5s infinite">ARE YOU READY? 🔍</div><div style="color:#c23030;font-size:clamp(12px,3.5vw,15px);font-weight:bold;margin-top:8px">ÊTES-VOUS PRÊTS ?</div></div>
 </div>
 
 <!-- END -->
 <div class="ph" id="P6">
-<div style="font-size:35px;margin-bottom:15px;opacity:0.5">🔍🎩</div>
+<div style="font-size:clamp(25px,8vw,35px);margin-bottom:15px;opacity:0.5">🔍🎩</div>
 <div style="color:#8a8a8a;font-size:12px;font-weight:bold;letter-spacing:4px">[ END / FIN DU MESSAGE ]</div>
 <div style="color:#999;font-size:11px;letter-spacing:3px;margin-top:15px">CLIQUEZ POUR REJOUER</div>
 </div>
