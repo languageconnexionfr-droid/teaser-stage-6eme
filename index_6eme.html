@@ -7,6 +7,7 @@ body{overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Rob
 .fog{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 80%,rgba(40,50,80,0.25) 0%,transparent 70%)}
 .ph{display:none;text-align:center;z-index:50;position:absolute;width:90%;max-width:650px;flex-direction:column;align-items:center;margin-bottom:28vh}
 .ph.on{display:flex}
+#P6.on{display:flex!important;top:50%;left:50%;transform:translate(-50%,-50%);margin-bottom:0!important}
 .cur{opacity:0.4;animation:bk 1s step-end infinite}
 .ri{opacity:0;transform:translateY(20px) scale(0.95);transition:all 1.5s ease-out}
 .ri.s{opacity:1;transform:translateY(0) scale(1)}
@@ -273,11 +274,9 @@ body{overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Rob
 
 <!-- DATE -->
 <div class="ph" id="P4">
-<div style="font-size:clamp(32px,9vw,45px);margin-bottom:10px"><span style="animation:float 3s ease infinite">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> <span style="animation:float 3s ease infinite;animation-delay:0.7s">🏰</span> <span style="animation:float 3s ease infinite;animation-delay:1.4s">☕</span></div>
-<div style="color:#2a1a08;font-size:clamp(28px,9vw,44px);font-weight:bold;text-shadow:0 1px 3px rgba(255,255,255,0.5)">22 JUIN 2026</div>
-<div style="color:#b8432e;font-size:clamp(11px,3vw,14px);letter-spacing:clamp(2px,1vw,5px);margin-top:8px;font-weight:bold">22 JUNE 2026</div>
-<div style="color:#4a6a8a;font-size:clamp(11px,3vw,14px);letter-spacing:clamp(1px,0.5vw,3px);margin-top:18px;font-weight:bold">COLLÈGE STANISLAS, PARIS</div>
-<div style="color:#b8432e;font-size:clamp(11px,3vw,13px);font-weight:bold;letter-spacing:clamp(1px,0.5vw,3px);margin-top:18px;animation:pu 2s infinite">🔔 BE READY / SOYEZ PRÊTS 🔔</div>
+<div style="font-size:clamp(32px,9vw,50px);margin-bottom:15px">📅</div>
+<div style="color:#2a1a08;font-size:clamp(40px,12vw,64px);font-weight:bold;text-shadow:0 2px 4px rgba(255,255,255,0.3)">22/06/2026</div>
+<div style="color:#5a4530;font-size:clamp(14px,4vw,20px);font-weight:bold;margin-top:20px;letter-spacing:2px">🏫 Collège Stanislas, Paris</div>
 </div>
 
 <!-- TITLE -->
@@ -285,42 +284,171 @@ body{overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Rob
 <div class="ri" id="R1"><div style="font-size:clamp(35px,10vw,50px);margin-bottom:10px">🎩🔍</div></div>
 <div class="ri" id="R2"><div style="color:#1a2a5c;font-size:clamp(22px,6vw,32px);font-weight:bold;letter-spacing:clamp(2px,0.8vw,4px);text-shadow:0 1px 3px rgba(255,255,255,0.5)">SHERLOCK HOLMES</div><div style="color:#b8432e;font-size:clamp(18px,5vw,26px);font-weight:bold;letter-spacing:clamp(2px,1vw,5px);margin-top:5px">DETECTIVE AGENCY</div></div>
 <div class="ri" id="R3" style="margin-top:12px"><div style="color:#4a6a8a;font-size:13px;letter-spacing:3px;font-weight:bold">🏢 221B Baker Street, London</div></div>
-<div class="ri" id="R4" style="margin-top:18px"><div style="color:#6a7a8a;font-size:14px;letter-spacing:3px;font-weight:bold">22 JUIN 2026 — COLLÈGE STANISLAS</div></div>
+<div class="ri" id="R4" style="margin-top:18px"><div style="color:#2a1a08;font-size:clamp(24px,7vw,36px);letter-spacing:3px;font-weight:bold;text-shadow:0 2px 4px rgba(255,255,255,0.3)">22 JUNE 2026</div><div style="color:#6a7a8a;font-size:clamp(12px,3vw,15px);letter-spacing:2px;margin-top:6px;font-style:italic">22 Juin 2026</div><div style="color:#5a4530;font-size:clamp(12px,3vw,15px);font-weight:bold;margin-top:12px;letter-spacing:2px">🏫 Collège Stanislas, Paris</div></div>
 <div class="ri" id="R5" style="margin-top:22px"><div style="color:#c23030;font-size:clamp(18px,5.5vw,26px);font-weight:bold;letter-spacing:clamp(2px,0.8vw,4px);animation:pu 2.5s infinite">ARE YOU READY? 🔍</div><div style="color:#c23030;font-size:clamp(12px,3.5vw,15px);font-weight:bold;margin-top:8px">ÊTES-VOUS PRÊTS ?</div></div>
 </div>
 
 <!-- END -->
-<div class="ph" id="P6">
-<div style="font-size:clamp(25px,8vw,35px);margin-bottom:15px;opacity:0.5">🔍🎩</div>
-<div style="color:#8a8a8a;font-size:12px;font-weight:bold;letter-spacing:4px">[ END / FIN DU MESSAGE ]</div>
+<div id="P6" style="display:none;text-align:center;z-index:999;position:fixed;top:0;left:0;right:0;bottom:0;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#87CEEB 0%,#a8d8ea 40%,#f0e6d3 75%,#e8dcc8 100%)">
+<div style="font-size:clamp(25px,8vw,35px);margin-bottom:15px">🔍🎩</div>
+<div style="color:#2a1a08;font-size:clamp(28px,8vw,42px);font-weight:bold;text-shadow:0 2px 4px rgba(255,255,255,0.3);margin-bottom:6px">22 JUNE 2026</div>
+<div style="color:#6a7a8a;font-size:clamp(13px,3.5vw,16px);font-style:italic;margin-bottom:15px">22 Juin 2026</div>
+<div style="color:#5a4530;font-size:clamp(13px,3.5vw,16px);font-weight:bold;letter-spacing:2px;margin-bottom:20px">🏫 Collège Stanislas, Paris</div>
+<div style="color:#8a8a8a;font-size:11px;font-weight:bold;letter-spacing:4px">[ END / FIN DU MESSAGE ]</div>
 <div style="color:#999;font-size:11px;letter-spacing:3px;margin-top:15px">CLIQUEZ POUR REJOUER</div>
 </div>
 
 </div>
 <script>
 var L=[
-{en:"Hello!",fr:"Bonjour !",p:2000,e:"👋"},
-{en:"We are Dan and Daisy.",fr:"Nous sommes Dan et Daisy.",p:2500,e:"🕵️‍♂️🕵️‍♀️"},
-{en:"We are detectives from London!",fr:"Nous sommes détectives à Londres !",p:2800,e:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-{en:"We work at 221B Baker Street.",fr:"On travaille au 221B Baker Street.",p:2800,e:"🏢"},
-{en:"We have a big problem!",fr:"On a un gros problème !",p:2500,e:"😱"},
-{en:"A teacher is missing!",fr:"Un professeur a disparu !",p:3000,e:"👩‍🏫❓"},
-{en:"We need to find clues.",fr:"Il faut trouver des indices.",p:2800,e:"🔎"},
-{en:"We need to crack secret codes.",fr:"Il faut déchiffrer des codes secrets.",p:2800,e:"🔐"},
-{en:"We need to solve the mystery!",fr:"Il faut résoudre le mystère !",p:2800,e:"🧩"},
-{en:"We need YOUR help!",fr:"On a besoin de VOUS !",p:2800,e:"👉"},
-{en:"Are you ready for the challenge?",fr:"Êtes-vous prêts à relever le défi ?",p:3500,e:"💪🔍"}
+{en:"Hello dear students. Sherlock Holmes speaking.",fr:"Bonjour chers élèves. Sherlock Holmes à l'appareil.",p:4000,e:"🎩🔍"},
+{en:"I need your help at the detective agency.",fr:"J'ai besoin de votre aide à l'agence.",p:4000,e:"🕵️"},
+{en:"5 mysteries are waiting for you.",fr:"5 mystères vous attendent.",p:3500,e:"🔍"},
+{en:"A stolen ring.",fr:"Une bague volée.",p:3000,e:"💍"},
+{en:"A vanished painting.",fr:"Un tableau disparu.",p:3000,e:"🖼️"},
+{en:"A time traveller.",fr:"Un voyageur du temps.",p:3000,e:"⌛"},
+{en:"And a missing teacher!",fr:"Et un professeur kidnappé !",p:3500,e:"👩‍🏫❓"},
+{en:"Find the clues.",fr:"Trouvez les indices.",p:3000,e:"🔎"},
+{en:"Crack the codes.",fr:"Déchiffrez les codes.",p:3000,e:"🔐"},
+{en:"Interview the witnesses.",fr:"Interrogez les témoins.",p:3000,e:"🗣️"},
+{en:"Solve all the mysteries!",fr:"Résolvez tous les mystères !",p:3500,e:"🧩"},
+{en:"I need YOUR help!",fr:"J'ai besoin de VOUS !",p:3500,e:"👉"},
+{en:"Are you ready for the challenge?",fr:"Êtes-vous prêts à relever le défi ?",p:4000,e:"💪🔍"}
 ];
+
 var run=false;
-function sp(id){document.querySelectorAll(".ph").forEach(function(p){p.classList.remove("on")});document.getElementById(id).classList.add("on")}
+var myVoice=null;
+
+function sp(id){
+document.querySelectorAll(".ph").forEach(function(p){p.classList.remove("on");});
+document.getElementById("P6").style.display="none";
+if(id==="P6"){
+document.getElementById("P6").style.display="flex";
+}else{
+document.getElementById(id).classList.add("on");
+}
+}
+
 function sl(ms){return new Promise(function(r){setTimeout(r,ms)})}
-function tp(en,fr,em){return new Promise(function(resolve){var i=0;var mx=Math.max(en.length,fr.length);var eE=document.getElementById("EN");var fE=document.getElementById("FR");var eM=document.getElementById("emoji");eE.innerHTML='<span class="cur">▌</span>';fE.textContent="";eM.textContent=em;var iv=setInterval(function(){if(i<=mx){eE.innerHTML=en.substring(0,i)+'<span class="cur">▌</span>';if(i<=fr.length)fE.textContent=fr.substring(0,i);i++}else{clearInterval(iv);resolve()}},50)})}
-async function go(){if(run)return;run=true;
-sp("P1");await sl(3000);
-sp("P2");await sl(1000);
-for(var i=0;i<L.length;i++){await tp(L[i].en,L[i].fr,L[i].e);await sl(L[i].p)}
+
+function pickVoice(){
+var voices=window.speechSynthesis.getVoices();
+if(!voices||voices.length===0)return;
+var dominated=["kate","fiona","martha","karen","moira","samantha","tessa","serena","female","femme","woman","girl","alice","victoria","emily","sophie","zira","hazel","linda","susan","jenny","siri"];
+// Try en-GB non-female
+for(var i=0;i<voices.length;i++){
+if(voices[i].lang==="en-GB"){
+var nm=voices[i].name.toLowerCase();
+var bad=false;
+for(var j=0;j<dominated.length;j++){if(nm.indexOf(dominated[j])!==-1){bad=true;break}}
+if(!bad){myVoice=voices[i];return}
+}}
+// Fallback any en-GB
+for(var i=0;i<voices.length;i++){if(voices[i].lang==="en-GB"){myVoice=voices[i];return}}
+// Fallback any en
+for(var i=0;i<voices.length;i++){if(voices[i].lang.indexOf("en")===0){myVoice=voices[i];return}}
+}
+
+window.speechSynthesis.onvoiceschanged=pickVoice;
+pickVoice();
+
+function speak(text){
+return new Promise(function(done){
+if(!window.speechSynthesis){done();return}
+pickVoice();
+window.speechSynthesis.cancel();
+var msg=new SpeechSynthesisUtterance(text);
+msg.lang="en-GB";
+msg.rate=0.85;
+msg.pitch=0.75;
+msg.volume=1.0;
+if(myVoice){msg.voice=myVoice}
+msg.onend=function(){done()};
+msg.onerror=function(){done()};
+window.speechSynthesis.speak(msg);
+// Safety timeout
+var words=text.split(" ").length;
+var timeout=Math.max(words*600,3000);
+setTimeout(function(){done()},timeout);
+});
+}
+
+function typeAndSpeak(en,fr,em){
+return new Promise(function(resolve){
+var eE=document.getElementById("EN");
+var fE=document.getElementById("FR");
+var eM=document.getElementById("emoji");
+eE.innerHTML="";
+fE.textContent="";
+eM.textContent=em;
+
+// Start speaking
+speak(en);
+
+// Start typing simultaneously
+var i=0;
+var mx=Math.max(en.length,fr.length);
+var speed=65;
+var iv=setInterval(function(){
+if(i<=mx){
+var enPart=en.substring(0,i);
+eE.innerHTML=enPart+'<span style="opacity:0.4;animation:bk 1s step-end infinite">▌</span>';
+if(i<=fr.length){fE.textContent=fr.substring(0,i)}
+i++;
+}else{
+clearInterval(iv);
+resolve();
+}
+},speed);
+});
+}
+
+function go(){
+if(run)return;
+run=true;
+
+// Unlock audio on user gesture (critical for iOS)
+try{
+window.speechSynthesis.cancel();
+var unlock=new SpeechSynthesisUtterance(" ");
+unlock.volume=0.01;
+unlock.rate=10;
+if(myVoice)unlock.voice=myVoice;
+unlock.lang="en-GB";
+window.speechSynthesis.speak(unlock);
+}catch(e){}
+
+pickVoice();
+
+setTimeout(async function(){
+
+sp("P1");
+await sl(3000);
+
+sp("P2");
 await sl(800);
-sp("P4");await sl(4000);
-sp("P5");await sl(600);var ids=["R1","R2","R3","R4","R5"];for(var j=0;j<ids.length;j++){document.getElementById(ids[j]).classList.add("s");await sl(1800)}await sl(4000);
-sp("P6");run=false;document.querySelectorAll(".ri").forEach(function(r){r.classList.remove("s")})}
+
+for(var i=0;i<L.length;i++){
+await typeAndSpeak(L[i].en,L[i].fr,L[i].e);
+await sl(L[i].p);
+}
+
+await sl(1000);
+
+sp("P5");
+await sl(500);
+var ids=["R1","R2","R3","R4","R5"];
+for(var j=0;j<ids.length;j++){
+document.getElementById(ids[j]).classList.add("s");
+await sl(1200);
+}
+await sl(2000);
+
+speak("Twenty second of June, twenty twenty six. Collège Stanislas, Paris.");
+sp("P6");
+run=false;
+document.querySelectorAll(".ri").forEach(function(r){r.classList.remove("s")});
+
+},300);
+}
 </script></body></html>
